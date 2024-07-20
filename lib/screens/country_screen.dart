@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_project_iti/screens/leagues_screen.dart';
 import 'package:graduation_project_iti/widgets/location_provider.dart';
 import 'package:provider/provider.dart';
-//import 'package:geolocator/geolocator.dart';
-import '../data/repository/get_country_repo.dart';
+import '../data/repository/country_repo.dart';
 
-// ignore: use_key_in_widget_constructors
 class CountryScreen extends StatefulWidget {
   @override
-  // ignore: library_private_types_in_public_api
   _CountryScreenState createState() => _CountryScreenState();
 }
 
@@ -103,34 +101,52 @@ class _CountryScreenState extends State<CountryScreen> {
                       final country = countries[index];
                       final countryName = country['country_name'] ?? 'Unknown';
                       final logoUrl = country['country_logo'] ?? '';
+                      final countryKey = country['country_key'];
 
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Card(
-                          elevation: 4,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                            side: BorderSide(
-                              color: locationProvider.currentPosition != null && isCountryCurrentLocation(country)
-                                  ? Colors.green // Special color for current location
-                                  : Colors.grey, // Default color
-                              width: 2,
+                      return GestureDetector(
+                        onTap: () {
+                          if (countryKey != null) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LeaguesScreen(countryKey: countryKey),
+                              ),
+                            );
+                          } else {
+                            // Handle the case where countryKey is null
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Invalid country key')),
+                            );
+                          }
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                            elevation: 4,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              side: BorderSide(
+                                color: locationProvider.currentPosition != null && isCountryCurrentLocation(country)
+                                    ? Colors.green // Special color for current location
+                                    : Colors.grey, // Default color
+                                width: 2,
+                              ),
                             ),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              _isValidUrl(logoUrl)
-                                  ? Image.network(
-                                      logoUrl,
-                                      width: 50,
-                                      height: 50,
-                                      errorBuilder: (context, error, stackTrace) => const Icon(Icons.error),
-                                    )
-                                  : const Icon(Icons.error),
-                              const SizedBox(height: 8),
-                              Text(countryName),
-                            ],
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                _isValidUrl(logoUrl)
+                                    ? Image.network(
+                                        logoUrl,
+                                        width: 50,
+                                        height: 50,
+                                        errorBuilder: (context, error, stackTrace) => const Icon(Icons.error),
+                                      )
+                                    : const Icon(Icons.error),
+                                const SizedBox(height: 8),
+                                Text(countryName),
+                              ],
+                            ),
                           ),
                         ),
                       );

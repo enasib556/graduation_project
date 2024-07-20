@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:graduation_project_iti/data/repository/get_teams_repo.dart';
-import 'package:graduation_project_iti/data/models/get_teams_model.dart';
+import 'package:graduation_project_iti/data/repository/teams_repo.dart';
+import 'package:graduation_project_iti/data/models/teams_model.dart';
 import 'package:graduation_project_iti/screens/topscorers_screen.dart';
 
 class TeamsScreen extends StatefulWidget {

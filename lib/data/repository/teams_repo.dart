@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:graduation_project_iti/data/models/get_teams_model.dart';
+import 'package:graduation_project_iti/data/models/teams_model.dart';
 
 class GetTeamsRepo {
   final Dio dio = Dio();

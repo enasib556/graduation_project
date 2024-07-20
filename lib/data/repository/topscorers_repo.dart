@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:graduation_project_iti/data/models/get_topscorers_model.dart';
+import 'package:graduation_project_iti/data/models/topscorers_model.dart';
 
 class GetTopscorersRepo {
   final Dio _dio = Dio();

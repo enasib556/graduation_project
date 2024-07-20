@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:graduation_project_iti/data/models/get_topscorers_model.dart';
-import 'package:graduation_project_iti/data/repository/get_topscorers_repo.dart';
+import 'package:graduation_project_iti/data/models/topscorers_model.dart';
+import 'package:graduation_project_iti/data/repository/topscorers_repo.dart';
 
 class TopScorersScreen extends StatefulWidget {
   final int leagueId;

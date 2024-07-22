@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project_iti/screens/country_screen.dart';
-import 'package:graduation_project_iti/screens/teams_screen.dart';
+//import 'package:graduation_project_iti/screens/teams_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:graduation_project_iti/widgets/location_provider.dart';
 //import 'screens/country_screen.dart';

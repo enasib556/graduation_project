@@ -12,6 +12,7 @@ class LeagueData {
   }
 
   Map<String, dynamic> toJson() {
+    // ignore: no_leading_underscores_for_local_identifiers
     final _data = <String, dynamic>{};
     _data['success'] = success;
     _data['result'] = result.map((e) => e.toJson()).toList();
@@ -46,6 +47,7 @@ class Result {
   }
 
   Map<String, dynamic> toJson() {
+    // ignore: no_leading_underscores_for_local_identifiers
     final _data = <String, dynamic>{};
     _data['league_key'] = leagueKey;
     _data['league_name'] = leagueName;

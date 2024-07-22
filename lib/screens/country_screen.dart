@@ -4,8 +4,10 @@ import 'package:graduation_project_iti/widgets/location_provider.dart';
 import 'package:provider/provider.dart';
 import '../data/repository/country_repo.dart';
 
+// ignore: use_key_in_widget_constructors
 class CountryScreen extends StatefulWidget {
   @override
+  // ignore: library_private_types_in_public_api
   _CountryScreenState createState() => _CountryScreenState();
 }
 
@@ -103,7 +105,7 @@ class _CountryScreenState extends State<CountryScreen> {
                       final logoUrl = country['country_logo'] ?? '';
                       final countryKey = country['country_key'];
 
-                      return GestureDetector(
+                      return InkWell(
                         onTap: () {
                           if (countryKey != null) {
                             Navigator.push(
@@ -115,7 +117,7 @@ class _CountryScreenState extends State<CountryScreen> {
                           } else {
                             // Handle the case where countryKey is null
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('Invalid country key')),
+                              const SnackBar(content: Text('Invalid country key')),
                             );
                           }
                         },

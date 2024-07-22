@@ -6,7 +6,8 @@ import 'package:graduation_project_iti/screens/teams_screen.dart';
 class LeaguesScreen extends StatefulWidget {
   final int countryKey;
 
-  LeaguesScreen({required this.countryKey});
+  // ignore: use_key_in_widget_constructors
+  const LeaguesScreen({required this.countryKey});
 
   @override
   State<LeaguesScreen> createState() => _LeaguesScreenState();
@@ -24,17 +25,17 @@ class _LeaguesScreenState extends State<LeaguesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF001432),
+      backgroundColor: const Color(0xFF001432),
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Color(0xFFE5E5E5)),
+          icon: const Icon(Icons.arrow_back, color: Color(0xFFE5E5E5)),
           onPressed: () {
             Navigator.of(context).pop();
           },
         ),
-        backgroundColor: Color(0xFF001432),
+        backgroundColor: const Color(0xFF001432),
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'Leagues',
           style: TextStyle(color: Color(0xFFE5E5E5), fontWeight: FontWeight.bold),
         ),
@@ -43,20 +44,20 @@ class _LeaguesScreenState extends State<LeaguesScreen> {
         future: futureLeaguesData,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            return Center(child: Text('Failed to load leagues data'));
+            return const Center(child: Text('Failed to load leagues data'));
           } else if (!snapshot.hasData || snapshot.data!.result.isEmpty) {
-            return Center(child: Text('No leagues available'));
+            return const Center(child: Text('No leagues available'));
           } else {
             return GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: 4.2 / 5,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
               ),
-              padding: EdgeInsets.all(5),
+              padding: const EdgeInsets.all(5),
               itemCount: snapshot.data!.result.length,
               itemBuilder: (context, index) {
                 var league = snapshot.data!.result[index];
@@ -73,12 +74,12 @@ class _LeaguesScreenState extends State<LeaguesScreen> {
                     } else {
                       // Handle the case where leagueId is null
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Invalid league ID')),
+                        const SnackBar(content: Text('Invalid league ID')),
                       );
                     }
                   },
                   child: Card(
-                    color: Color.fromARGB(255, 5, 57, 134),
+                    color: const Color.fromARGB(255, 5, 57, 134),
                     elevation: 5,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -89,16 +90,16 @@ class _LeaguesScreenState extends State<LeaguesScreen> {
                             height: 50,
                             width: 50,
                             errorBuilder: (context, error, stackTrace) {
-                              return Icon(Icons.error, color: Color(0xFFE5E5E5));
+                              return const Icon(Icons.error, color: Color(0xFFE5E5E5));
                             },
                           )
                         else
-                          Icon(Icons.sports_soccer, color: Color(0xFFE5E5E5), size: 50),
-                        SizedBox(height: 10),
+                          const Icon(Icons.sports_soccer, color: Color(0xFFE5E5E5), size: 50),
+                        const SizedBox(height: 10),
                         Text(
                           league.leagueName,
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 16,
                             color: Color(0xFFE5E5E5),
                             fontWeight: FontWeight.bold,

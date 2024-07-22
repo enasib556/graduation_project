@@ -12,6 +12,7 @@ class GetTeamsModel {
   }
 
   Map<String, dynamic> toJson() {
+    // ignore: no_leading_underscores_for_local_identifiers
     final _data = <String, dynamic>{};
     _data['success'] = success;
     _data['result'] = result.map((e)=>e.toJson()).toList();
@@ -42,6 +43,7 @@ class Result {
   }
 
   Map<String, dynamic> toJson() {
+    // ignore: no_leading_underscores_for_local_identifiers
     final _data = <String, dynamic>{};
     _data['team_key'] = teamKey;
     _data['team_name'] = teamName;
@@ -183,6 +185,7 @@ class Players {
   }
 
   Map<String, dynamic> toJson() {
+    // ignore: no_leading_underscores_for_local_identifiers
     final _data = <String, dynamic>{};
     _data['player_key'] = playerKey;
     _data['player_image'] = playerImage;
@@ -246,6 +249,7 @@ class Coaches {
   }
 
   Map<String, dynamic> toJson() {
+    // ignore: no_leading_underscores_for_local_identifiers
     final _data = <String, dynamic>{};
     _data['coach_name'] = coachName;
     _data['coach_country'] = coachCountry;

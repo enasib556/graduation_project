@@ -6,9 +6,11 @@ import 'package:graduation_project_iti/screens/topscorers_screen.dart';
 class TeamsScreen extends StatefulWidget {
   final int leagueId;
 
-  TeamsScreen({required this.leagueId});
+  // ignore: use_key_in_widget_constructors
+  const TeamsScreen({required this.leagueId});
 
   @override
+  // ignore: library_private_types_in_public_api
   _TeamsScreenState createState() => _TeamsScreenState();
 }
 
@@ -51,6 +53,7 @@ class _TeamsScreenState extends State<TeamsScreen> with SingleTickerProviderStat
       });
     } catch (e) {
       // Handle error
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error fetching teams: $e')),
       );
@@ -67,10 +70,10 @@ class _TeamsScreenState extends State<TeamsScreen> with SingleTickerProviderStat
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('League Details'),
+          title: const Text('League Details'),
           bottom: TabBar(
             controller: _tabController,
-            tabs: [
+            tabs: const [
               Tab(text: 'Teams'),
               Tab(text: 'Top Scorers'),
             ],
@@ -94,7 +97,7 @@ class _TeamsScreenState extends State<TeamsScreen> with SingleTickerProviderStat
           padding: const EdgeInsets.all(8.0),
           child: TextField(
             controller: _searchController,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: 'Search for a team',
               border: OutlineInputBorder(),
               prefixIcon: Icon(Icons.search),
@@ -103,9 +106,9 @@ class _TeamsScreenState extends State<TeamsScreen> with SingleTickerProviderStat
         ),
         Expanded(
           child: filteredTeams.isEmpty
-              ? Center(child: CircularProgressIndicator())
+              ? const Center(child: CircularProgressIndicator())
               : GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     childAspectRatio: 3 / 2,
                     crossAxisSpacing: 10,
@@ -123,7 +126,7 @@ class _TeamsScreenState extends State<TeamsScreen> with SingleTickerProviderStat
                         elevation: 4,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15),
-                          side: BorderSide(
+                          side: const BorderSide(
                             color: Colors.grey,
                             width: 2,
                           ),

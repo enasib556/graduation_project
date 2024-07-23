@@ -29,25 +29,28 @@ class _TopScorersScreenState extends State<TopScorersScreen> {
       backgroundColor: Color(0xff222421),
       appBar: AppBar(
         backgroundColor: Color(0xff1B1B1B),
-        title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                " Top",
-                style: GoogleFonts.montserrat(
-                    fontStyle: FontStyle.italic,
-                    color: Color(0xffFFFFFF),
-                    fontWeight: FontWeight.bold,
-                    fontSize: screenWidth * 0.05), // Responsive font size
-              ),
-              Text("Scorers",
+        title: Padding(
+         padding: const EdgeInsets.only(left: 50),
+          child: Row(
+              //mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  " Top",
                   style: GoogleFonts.montserrat(
-                    fontStyle: FontStyle.italic,
-                    color: Color(0xff6ABE66),
-                    fontWeight: FontWeight.bold,
-                    fontSize: screenWidth * 0.05)), // Responsive font size
-            ],
-          ),
+                      fontStyle: FontStyle.italic,
+                      color: Color(0xffFFFFFF),
+                      fontWeight: FontWeight.bold,
+                      fontSize: screenWidth * 0.05), // Responsive font size
+                ),
+                Text("Scorers",
+                    style: GoogleFonts.montserrat(
+                      fontStyle: FontStyle.italic,
+                      color: Color(0xff6ABE66),
+                      fontWeight: FontWeight.bold,
+                      fontSize: screenWidth * 0.05)), // Responsive font size
+              ],
+            ),
+        ),
       ),
       body: FutureBuilder<GetTopscorersModel>(
         future: _topScorersFuture,

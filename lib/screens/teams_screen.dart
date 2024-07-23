@@ -81,24 +81,27 @@ class _TeamsScreenState extends State<TeamsScreen> with SingleTickerProviderStat
         ),
           backgroundColor: Color(0xff1B1B1B),
           centerTitle: true,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                " TE",
-                style: GoogleFonts.montserrat(
-                    fontStyle: FontStyle.italic,
-                    color: Color(0xffFFFFFF),
-                    fontWeight: FontWeight.bold,
-                    fontSize: screenWidth * 0.05), // Responsive font size
-              ),
-              Text("AMS",
+          title: Padding(
+           padding: const EdgeInsets.only(left: 50),
+            child: Row(
+             // mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  " TE",
                   style: GoogleFonts.montserrat(
-                    fontStyle: FontStyle.italic,
-                    color: Color(0xff6ABE66),
-                    fontWeight: FontWeight.bold,
-                    fontSize: screenWidth * 0.05)), // Responsive font size
-            ],
+                      fontStyle: FontStyle.italic,
+                      color: Color(0xffFFFFFF),
+                      fontWeight: FontWeight.bold,
+                      fontSize: screenWidth * 0.085), // Responsive font size
+                ),
+                Text("AMS",
+                    style: GoogleFonts.montserrat(
+                      fontStyle: FontStyle.italic,
+                      color: Color(0xff6ABE66),
+                      fontWeight: FontWeight.bold,
+                      fontSize: screenWidth * 0.085)), // Responsive font size
+              ],
+            ),
           ),
           bottom: TabBar(
             labelColor: Colors.white,

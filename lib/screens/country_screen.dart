@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:graduation_project_iti/screens/leagues_screen.dart';
 import 'package:graduation_project_iti/widgets/location_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import '../data/repository/country_repo.dart';
 
-// ignore: use_key_in_widget_constructors
 class CountryScreen extends StatefulWidget {
   @override
-  // ignore: library_private_types_in_public_api
   _CountryScreenState createState() => _CountryScreenState();
 }
 
 class _CountryScreenState extends State<CountryScreen> {
   List<dynamic> countries = [];
   final ScrollController _scrollController = ScrollController();
-  final int _crossAxisCount = 2; // Number of columns in the grid
-  final double _itemHeight = 130.0; // Height of each grid item including spacing
 
   @override
   void initState() {
@@ -37,10 +35,10 @@ class _CountryScreenState extends State<CountryScreen> {
   }
 
   void scrollToCountry(String countryName) {
-    final index = countries.indexWhere((country) => country['country_name'] == countryName);
+    final index = countries
+        .indexWhere((country) => country['country_name'] == countryName);
     if (index != -1) {
-      final int row = (index / _crossAxisCount).floor();
-      final double targetOffset = row * _itemHeight;
+      final double targetOffset = index * 50.0;
       _scrollController.animateTo(
         targetOffset,
         duration: const Duration(milliseconds: 500),
@@ -54,19 +52,53 @@ class _CountryScreenState extends State<CountryScreen> {
   }
 
   bool isCountryCurrentLocation(dynamic country) {
-    return country['country_name'] == Provider.of<LocationProvider>(context).currentCountryName;
+    return country['country_name'] ==
+        Provider.of<LocationProvider>(context).currentCountryName;
   }
 
   @override
   Widget build(BuildContext context) {
     final locationProvider = Provider.of<LocationProvider>(context);
+    final double screenHeight = MediaQuery.of(context).size.height;
+    final double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      backgroundColor: Color(0xff222421),
       appBar: AppBar(
-        title: const Text('Countries'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Color(0xFFE5E5E5)),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        scrolledUnderElevation: 0,
+        backgroundColor: Color(0xff1B1B1B),
+        centerTitle: true,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              " Coun",
+              style: GoogleFonts.montserrat(
+                  fontStyle: FontStyle.italic,
+                  color: Color(0xffFFFFFF),
+                  fontWeight: FontWeight.bold,
+                  fontSize: screenWidth * 0.08),
+            ),
+            Text("tires",
+                style: GoogleFonts.montserrat(
+                    fontStyle: FontStyle.italic,
+                    color: Color(0xff6ABE66),
+                    fontWeight: FontWeight.bold,
+                    fontSize: screenWidth * 0.08))
+          ],
+        ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.location_on),
+            icon: const Icon(
+              Icons.location_on,
+              color: Color(0xffFFFFFF),
+            ),
             onPressed: () async {
               await locationProvider.getCurrentLocation();
               if (locationProvider.currentCountryName != null) {
@@ -81,10 +113,11 @@ class _CountryScreenState extends State<CountryScreen> {
         children: [
           if (locationProvider.currentPosition != null)
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(10),
               child: Text(
                 'Current Location: ${locationProvider.currentPosition!.latitude}, ${locationProvider.currentPosition!.longitude}\nCountry: ${locationProvider.currentCountryName ?? "Unknown"}',
-                style: const TextStyle(fontSize: 16),
+                style: GoogleFonts.montserrat(
+                    fontSize: screenHeight * 0.02, color: Colors.white),
               ),
             ),
           Expanded(
@@ -93,10 +126,10 @@ class _CountryScreenState extends State<CountryScreen> {
                 : GridView.builder(
                     controller: _scrollController,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: _crossAxisCount, // Number of columns in the grid
-                      childAspectRatio: 3 / 2, // Aspect ratio for each grid item
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10,
+                      crossAxisCount: 3, // Number of columns in the grid
+                      childAspectRatio: 0.9, // Aspect ratio for each grid item
+                      crossAxisSpacing: screenWidth * 0.05,
+                      mainAxisSpacing: screenHeight * 0.05,
                     ),
                     itemCount: countries.length,
                     itemBuilder: (context, index) {
@@ -111,45 +144,51 @@ class _CountryScreenState extends State<CountryScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => LeaguesScreen(countryKey: countryKey),
+                                builder: (context) =>
+                                    LeaguesScreen(countryKey: countryKey),
                               ),
                             );
                           } else {
-                            // Handle the case where countryKey is null
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Invalid country key')),
+                              const SnackBar(
+                                  content: Text('Invalid country key')),
                             );
                           }
                         },
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Card(
-                            elevation: 4,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              side: BorderSide(
-                                color: locationProvider.currentPosition != null && isCountryCurrentLocation(country)
-                                    ? Colors.green // Special color for current location
-                                    : Colors.grey, // Default color
-                                width: 2,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            CircleAvatar(
+                              radius: screenWidth * 0.12,
+                              backgroundColor:
+                                  locationProvider.currentPosition != null &&
+                                          isCountryCurrentLocation(country)
+                                      ? Color(0xff6ABE66)
+                                      : Colors.transparent,
+                              child: CircleAvatar(
+                                backgroundColor: Color(0xff222421),
+                                radius: screenWidth * 0.1,
+                                backgroundImage: _isValidUrl(logoUrl)
+                                    ? CachedNetworkImageProvider(logoUrl)
+                                    : null,
+                                child: !_isValidUrl(logoUrl)
+                                    ? const Icon(Icons.error,
+                                        color: Color(0xff6ABE66), size: 30)
+                                    : null,
                               ),
                             ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                _isValidUrl(logoUrl)
-                                    ? Image.network(
-                                        logoUrl,
-                                        width: 50,
-                                        height: 50,
-                                        errorBuilder: (context, error, stackTrace) => const Icon(Icons.error),
-                                      )
-                                    : const Icon(Icons.error),
-                                const SizedBox(height: 8),
-                                Text(countryName),
-                              ],
+                            const SizedBox(height: 10),
+                            Text(
+                              countryName,
+                              style: GoogleFonts.montserrat(
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.bold,
+                                fontSize: screenWidth * 0.04,
+                                color: Colors.white,
+                              ),
+                              overflow: TextOverflow.ellipsis,
                             ),
-                          ),
+                          ],
                         ),
                       );
                     },

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:graduation_project_iti/data/models/get_leagues_model.dart';
 import 'package:graduation_project_iti/data/repository/get_leagues_repo.dart';
 import 'package:graduation_project_iti/screens/teams_screen.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class LeaguesScreen extends StatefulWidget {
   final int countryKey;
@@ -61,7 +62,7 @@ class _LeaguesScreenState extends State<LeaguesScreen> {
               itemCount: snapshot.data!.result.length,
               itemBuilder: (context, index) {
                 var league = snapshot.data!.result[index];
-                return GestureDetector(
+                return InkWell(
                   onTap: () {
                     // ignore: unnecessary_null_comparison
                     if (league.leagueKey != null) {
@@ -85,11 +86,11 @@ class _LeaguesScreenState extends State<LeaguesScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         if (league.leagueLogo != null && league.leagueLogo!.isNotEmpty)
-                          Image.network(
-                            league.leagueLogo!,
+                          CachedNetworkImage(
+                            imageUrl: league.leagueLogo!,
                             height: 50,
                             width: 50,
-                            errorBuilder: (context, error, stackTrace) {
+                            errorWidget: (context, url, error) {
                               return const Icon(Icons.error, color: Color(0xFFE5E5E5));
                             },
                           )

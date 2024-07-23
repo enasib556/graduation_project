@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:graduation_project_iti/data/models/topscorers_model.dart';
 import 'package:graduation_project_iti/data/repository/topscorers_repo.dart';
 
@@ -22,9 +23,31 @@ class _TopScorersScreenState extends State<TopScorersScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final screenWidth = mediaQuery.size.width;
     return Scaffold(
+      backgroundColor: Color(0xff222421),
       appBar: AppBar(
-        title: Text('Top Scorers'),
+        backgroundColor: Color(0xff1B1B1B),
+        title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                " Top",
+                style: GoogleFonts.montserrat(
+                    fontStyle: FontStyle.italic,
+                    color: Color(0xffFFFFFF),
+                    fontWeight: FontWeight.bold,
+                    fontSize: screenWidth * 0.05), // Responsive font size
+              ),
+              Text("Scorers",
+                  style: GoogleFonts.montserrat(
+                    fontStyle: FontStyle.italic,
+                    color: Color(0xff6ABE66),
+                    fontWeight: FontWeight.bold,
+                    fontSize: screenWidth * 0.05)), // Responsive font size
+            ],
+          ),
       ),
       body: FutureBuilder<GetTopscorersModel>(
         future: _topScorersFuture,
@@ -44,10 +67,10 @@ class _TopScorersScreenState extends State<TopScorersScreen> {
                 return ListTile(
                   title: Text(
                     scorer.playerName,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: GoogleFonts.montserrat(fontWeight: FontWeight.bold, color: Colors.white),
                   ),
                   subtitle: Text(
-                    '${scorer.teamName} - ${scorer.goals} goals',
+                    '${scorer.teamName} - ${scorer.goals} goals',style: GoogleFonts.montserrat(color: Color(0xff6ABE66)),
                   ),
                 );
               },

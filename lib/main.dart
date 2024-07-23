@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project_iti/screens/country_screen.dart';
+//import 'package:graduation_project_iti/screens/country_screen.dart';
+import 'package:graduation_project_iti/screens/teams_screen.dart';
 //import 'package:graduation_project_iti/screens/teams_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:graduation_project_iti/widgets/location_provider.dart';
@@ -21,10 +23,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      debugShowCheckedModeBanner: false,
       home:CountryScreen(),
     );
   }

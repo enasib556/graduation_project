@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:graduation_project_iti/data/repository/teams_repo.dart';
 import 'package:graduation_project_iti/data/models/teams_model.dart';
 import 'package:graduation_project_iti/screens/topscorers_screen.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class TeamsScreen extends StatefulWidget {
   final int leagueId;
 
-  // ignore: use_key_in_widget_constructors
   const TeamsScreen({required this.leagueId});
 
   @override
-  // ignore: library_private_types_in_public_api
   _TeamsScreenState createState() => _TeamsScreenState();
 }
 
@@ -52,8 +52,6 @@ class _TeamsScreenState extends State<TeamsScreen> with SingleTickerProviderStat
         filteredTeams = teams;
       });
     } catch (e) {
-      // Handle error
-      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error fetching teams: $e')),
       );
@@ -66,12 +64,45 @@ class _TeamsScreenState extends State<TeamsScreen> with SingleTickerProviderStat
 
   @override
   Widget build(BuildContext context) {
+    // Get screen size
+    final mediaQuery = MediaQuery.of(context);
+    final screenWidth = mediaQuery.size.width;
+
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        backgroundColor: Color(0xff222421),
         appBar: AppBar(
-          title: const Text('League Details'),
+          leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Color(0xFFE5E5E5)),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+          backgroundColor: Color(0xff1B1B1B),
+          centerTitle: true,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                " TE",
+                style: GoogleFonts.montserrat(
+                    fontStyle: FontStyle.italic,
+                    color: Color(0xffFFFFFF),
+                    fontWeight: FontWeight.bold,
+                    fontSize: screenWidth * 0.05), // Responsive font size
+              ),
+              Text("AMS",
+                  style: GoogleFonts.montserrat(
+                    fontStyle: FontStyle.italic,
+                    color: Color(0xff6ABE66),
+                    fontWeight: FontWeight.bold,
+                    fontSize: screenWidth * 0.05)), // Responsive font size
+            ],
+          ),
           bottom: TabBar(
+            labelColor: Colors.white,
+            indicatorColor: Color(0xff6ABE66),
             controller: _tabController,
             tabs: const [
               Tab(text: 'Teams'),
@@ -82,37 +113,39 @@ class _TeamsScreenState extends State<TeamsScreen> with SingleTickerProviderStat
         body: TabBarView(
           controller: _tabController,
           children: [
-            _buildTeamsScreen(), // Teams screen content
-          TopScorersScreen(leagueId: widget.leagueId), // Top scorers screen
+            _buildTeamsScreen(screenWidth),
+            TopScorersScreen(leagueId: widget.leagueId),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildTeamsScreen() {
+  Widget _buildTeamsScreen(double screenWidth) {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: TextField(
+          padding: EdgeInsets.all(screenWidth * 0.02), // Responsive padding
+          child: TextField(cursorColor:  Colors.white,
             controller: _searchController,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
+              fillColor: Colors.white,
               hintText: 'Search for a team',
-              border: OutlineInputBorder(),
-              prefixIcon: Icon(Icons.search),
+              hintStyle: TextStyle(color: Colors.white),
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
+              prefixIcon: Icon(Icons.search, color: Colors.white, size: screenWidth * 0.05), // Responsive icon size
             ),
           ),
         ),
         Expanded(
           child: filteredTeams.isEmpty
-              ? const Center(child: CircularProgressIndicator())
+              ? Center(child: CircularProgressIndicator())
               : GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    childAspectRatio: 3 / 2,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
+                    childAspectRatio: 0.9,
+                    crossAxisSpacing: screenWidth * 0.02, // Responsive spacing
+                    mainAxisSpacing: screenWidth * 0.02, // Responsive spacing
                   ),
                   itemCount: filteredTeams.length,
                   itemBuilder: (context, index) {
@@ -122,28 +155,33 @@ class _TeamsScreenState extends State<TeamsScreen> with SingleTickerProviderStat
 
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Card(
-                        elevation: 4,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          side: const BorderSide(
-                            color: Colors.grey,
-                            width: 2,
-                          ),
-                        ),
+                      child: CircleAvatar(
+                        
+                        radius: screenWidth * 0.06,
+                        backgroundColor: Colors.transparent, // Responsive radius
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             _isValidUrl(logoUrl)
-                                ? Image.network(
-                                    logoUrl,
-                                    width: 50,
-                                    height: 50,
-                                    errorBuilder: (context, error, stackTrace) => Icon(Icons.error),
+                                ? CachedNetworkImage(
+                                    imageUrl: logoUrl,
+                                    height: 100,
+                                    width: 100,
+                                    placeholder: (context, url) => const CircularProgressIndicator(),
+                                    errorWidget: (context, url, error) => const Icon(Icons.error, color: Color(0xff6ABE66), size: 30),
                                   )
-                                : Icon(Icons.error),
-                            SizedBox(height: 8),
-                            Text(teamName),
+                                : const Icon(Icons.error, color: Color(0xff6ABE66), size: 30),
+                            const SizedBox(height: 10),
+                            Text(
+                              teamName,
+                              style: GoogleFonts.montserrat(
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.bold,
+                                fontSize: screenWidth * 0.045,
+                                color: Colors.white,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ],
                         ),
                       ),
@@ -155,4 +193,3 @@ class _TeamsScreenState extends State<TeamsScreen> with SingleTickerProviderStat
     );
   }
 }
-

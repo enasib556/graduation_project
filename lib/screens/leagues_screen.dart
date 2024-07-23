@@ -115,7 +115,7 @@ class _LeaguesScreenState extends State<LeaguesScreen> {
                               imageBuilder: (context, imageProvider) =>
                                   CircleAvatar(
                                 backgroundImage: imageProvider,
-                                radius: screenWidth * 0.14,
+                                radius: screenWidth * 0.12,
                               ),
                               placeholder: (context, url) =>
                                   const CircularProgressIndicator(),

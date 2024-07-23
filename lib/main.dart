@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home:LeaguesScreen(countryKey: 42,),
+      home:CountryScreen()
     );
   }
 }

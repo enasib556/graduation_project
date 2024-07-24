@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:graduation_project_iti/data/cubits/leagues_cubit/league_cubit.dart';
 import 'package:graduation_project_iti/data/repository/get_leagues_repo.dart';
-import 'package:graduation_project_iti/screens/teams_screen.dart';
-import 'package:cached_network_image/cached_network_image.dart'; 
+import 'package:graduation_project_iti/screens/teams_screen_content.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:graduation_project_iti/screens/teamsscreen.dart'; 
 
 class LeaguesScreen extends StatelessWidget {
   final int countryKey;

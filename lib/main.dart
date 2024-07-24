@@ -3,7 +3,7 @@ import 'package:graduation_project_iti/data/cubits/leagues_cubit/league_cubit.da
 import 'package:graduation_project_iti/screens/country_screen.dart';
 import 'package:graduation_project_iti/screens/leagues_screen.dart';
 //import 'package:graduation_project_iti/screens/country_screen.dart';
-import 'package:graduation_project_iti/screens/teams_screen.dart';
+import 'package:graduation_project_iti/screens/teams_screen_content.dart';
 //import 'package:graduation_project_iti/screens/teams_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:graduation_project_iti/widgets/location_provider.dart';

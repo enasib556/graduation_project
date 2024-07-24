@@ -1,6 +1,7 @@
 class LeagueData {
-    late final int success;
+  late final int success;
   late final List<Result> result;
+
   LeagueData({
     required this.success,
     required this.result,
@@ -12,7 +13,6 @@ class LeagueData {
   }
 
   Map<String, dynamic> toJson() {
-    // ignore: no_leading_underscores_for_local_identifiers
     final _data = <String, dynamic>{};
     _data['success'] = success;
     _data['result'] = result.map((e) => e.toJson()).toList();
@@ -28,7 +28,7 @@ class Result {
   late final String? leagueLogo;
   late final String? countryLogo;
 
-    Result({
+  Result({
     required this.leagueKey,
     required this.leagueName,
     required this.countryKey,
@@ -47,7 +47,6 @@ class Result {
   }
 
   Map<String, dynamic> toJson() {
-    // ignore: no_leading_underscores_for_local_identifiers
     final _data = <String, dynamic>{};
     _data['league_key'] = leagueKey;
     _data['league_name'] = leagueName;

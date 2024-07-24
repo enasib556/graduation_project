@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_project_iti/data/cubits/leagues_cubit/league_cubit.dart';
 import 'package:graduation_project_iti/screens/country_screen.dart';
 import 'package:graduation_project_iti/screens/leagues_screen.dart';
 //import 'package:graduation_project_iti/screens/country_screen.dart';
@@ -25,7 +26,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home:CountryScreen()
+      home:CountryScreen(),
     );
   }
 }
+

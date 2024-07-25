@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graduation_project_iti/data/cubits/players_cubit/players_cubit.dart';
 import 'package:graduation_project_iti/data/cubits/players_cubit/players_state.dart';
-import 'package:graduation_project_iti/widgets/player_screen/viewplayer.dart';
-
-
+import 'ViewPlayer.dart';
 
 class TableView extends StatelessWidget {
   const TableView({super.key});
@@ -54,20 +52,22 @@ class TableView extends StatelessWidget {
          return SizedBox(
             height: MediaQuery.of(context).size.height,
             child: ListView.builder(
-                itemCount: state.responseModel.players.length,
+                itemCount: state.responseModel.length,
+
                 itemBuilder: (context,index) {
                   return
-                    ViewPlayer( type:  state.responseModel.players[index].playerType
-                        , img:   state.responseModel.players[index].playerImage
-                        , name:  state.responseModel.players[index].playerName,
-                      playerAge:state.responseModel.players[index].playerAge ,
-                        playerAssists: state.responseModel.players[index].playerAssists,
-                      playerGoals: state.responseModel.players[index].playerGoals,
-                      playerNumber: state.responseModel.players[index].playerNumber,
-                      playerRedCards: state.responseModel.players[index].playerRedCards,
-                      playerYellowCards: state.responseModel.players[index].playerYellowCards,
+                    ViewPlayer(
+                        img:   state.responseModel[index].playerImage
+                        , name:  state.responseModel[index].playerName,
+                      playerAge:state.responseModel[index].playerAge ,
+                        playerAssists: state.responseModel[index].playerAssists,
+                      playerGoals: state.responseModel[index].playerGoals,
+                      playerNumber: state.responseModel[index].playerNumber,
+                      playerRedCards: state.responseModel[index].playerRedCards,
+                      playerYellowCards: state.responseModel[index].playerYellowCards,
                       //   playerCountery:state.responseModel.players[index].playerCountery,
-                      playerCountery: state.responseModel.players[index].playerCountry,
+                      playerCountery: state.responseModel[index].playerCountry,
+                      type: state.responseModel[index].playerType,
 
                     );
                 }
@@ -78,19 +78,19 @@ class TableView extends StatelessWidget {
           return SizedBox(
               height: MediaQuery.of(context).size.height,
               child: ListView.builder(
-                  itemCount: state.result.players.length,
+                  itemCount: state.result.length,
                   itemBuilder: (context,index) {
-                    return ViewPlayer( type:  state.result.players[index].playerType
-                        , img:   state.result.players[index].playerImage
-                        , name:  state.result.players[index].playerName,
-                        playerAge:state.result.players[index].playerAge ,
-                        playerAssists: state.result.players[index].playerAssists,
-                        playerGoals: state.result.players[index].playerGoals,
-                        playerNumber: state.result.players[index].playerNumber,
-                        playerRedCards: state.result.players[index].playerRedCards,
-                        playerYellowCards: state.result.players[index].playerYellowCards,
+                    return ViewPlayer( type:  state.result[index].playerType
+                        , img:   state.result[index].playerImage
+                        , name:  state.result[index].playerName,
+                        playerAge:state.result[index].playerAge ,
+                        playerAssists: state.result[index].playerAssists,
+                        playerGoals: state.result[index].playerGoals,
+                        playerNumber: state.result[index].playerNumber,
+                        playerRedCards: state.result[index].playerRedCards,
+                        playerYellowCards: state.result[index].playerYellowCards,
                         // playerCountery:state.result.players[index].playerCountery
-                      playerCountery: state.result.players[index].playerCountry,
+                      playerCountery: state.result[index].playerCountry,
                     );
                   }
               )

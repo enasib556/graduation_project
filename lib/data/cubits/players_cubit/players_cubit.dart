@@ -5,38 +5,36 @@ import 'package:graduation_project_iti/data/repository/player_repo.dart';
 import 'package:meta/meta.dart';
 
 
-
-
-
 class TableCubit extends Cubit<TableState> {
   TableCubit() : super(TableInitial());
 
-Team ?foundUsers;
+  // Team ?foundUsers;
 
   Future<void> runFilter(String enteredKeyword,int x) async {
 
     emit(GetNewsLoading());
-    Team ?response = await GetNewsRepo().getNews(x);
+    List<PlayerData>? response = await GetNewsRepo().getNews(x);
     if (response == null) {
       emit(GetNewsError());    }
     //
     else {
 
-      List<Player> results;
+      List<PlayerData> results;
       if (enteredKeyword.isEmpty) {
         // if the search field is empty? or only contains white-space, we'll display all users
-        results = response.players;
+        results = response ;
       } else {
-        results = response.players.where((Player) =>
+        results = response.where((Player) =>
             Player.playerName.toLowerCase().contains(enteredKeyword.toLowerCase())).toList();
         // we use the toLowerCase() method to make it case-insensitive
       }
       //**
 
-      Team filteredTeam = Team(players: results);
+      List<PlayerData> filteredTeam = results;
       emit(ShowFilter(
           filteredTeam
       ));
+      print('the tupe is    ${filteredTeam[0].playerType}');
     }
 
 
@@ -45,7 +43,7 @@ Team ?foundUsers;
   Future<void> getNews(int x) async {
     emit(GetNewsLoading());
 
-    Team? response = await GetNewsRepo().getNews(x);
+    List<PlayerData>? response = await GetNewsRepo().getNews(x);
 
     if (response != null) {
       emit(GetNewsSuccess(response));

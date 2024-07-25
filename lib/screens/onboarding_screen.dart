@@ -1,45 +1,21 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graduation_project_iti/data/cubits/onboarding_cubit/OnboardingCubit.dart';
+import 'package:graduation_project_iti/data/cubits/onboarding_cubit/onboardingstate.dart';
 import 'package:graduation_project_iti/widgets/splash_onboarding/Indicator_widget.dart';
 import 'package:graduation_project_iti/widgets/splash_onboarding/OnboardingPage_widget.dart';
 import 'package:graduation_project_iti/widgets/splash_onboarding/SkipButton_widget.dart';
-class OnboardingScreen extends StatefulWidget {
-  @override
-  _OnboardingScreenState createState() => _OnboardingScreenState();
-}
 
-class _OnboardingScreenState extends State<OnboardingScreen> {
-  late Timer _timer;
-
-  @override
-  void initState() {
-    super.initState();
-
-    final onboardingCubit = context.read<OnboardingCubit>();
-
-    _timer = Timer.periodic(Duration(seconds: 3), (Timer timer) {
-      onboardingCubit.nextPage();
-    });
-  }
-
-  @override
-  void dispose() {
-    _timer.cancel();
-    super.dispose();
-  }
-
-  void _skipOnboarding() {
+class OnboardingScreen extends StatelessWidget {
+  void _skipOnboarding(BuildContext context) {
     Navigator.pushReplacementNamed(context, '/login');
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          BlocBuilder<OnboardingCubit, int>(
+          BlocBuilder<OnboardingCubit, OnboardingState>(
             builder: (context, state) {
               return PageView(
                 controller: context.read<OnboardingCubit>().pageController,
@@ -78,18 +54,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               );
             },
           ),
-          SkipButton(onPressed: _skipOnboarding),
+          SkipButton(onPressed: () => _skipOnboarding(context)),
           Positioned(
             bottom: 30,
             left: 0,
             right: 0,
-            child: BlocBuilder<OnboardingCubit, int>(
+            child: BlocBuilder<OnboardingCubit, OnboardingState>(
               builder: (context, state) {
+                int currentIndex = state is OnboardingPageUpdated ? state.currentPage : 0;
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(
                     3,
-                    (index) => Indicator(isActive: index == state),
+                    (index) => Indicator(isActive: index == currentIndex),
                   ),
                 );
               },

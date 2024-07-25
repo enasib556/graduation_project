@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:graduation_project_iti/widgets/login_home/app_drawer.dart';
-import 'package:graduation_project_iti/widgets/player_screen/show_diolag.dart';
+import 'package:graduation_project_iti/widgets/login_home/show_diolag.dart';
+
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -20,16 +22,18 @@ class HomeScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text("Ho",
-                style: TextStyle(
+                style: GoogleFonts.montserrat(
                     color: Colors.white,
                     fontSize: 40,
-                    fontWeight: FontWeight.bold)),
+                    fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.italic)),
             Text(
               "me",
-              style: TextStyle(
+              style: GoogleFonts.montserrat(
                   color: Color(0xff6ABE66),
                   fontSize: 40,
-                  fontWeight: FontWeight.bold),
+                  fontWeight: FontWeight.bold,
+                  fontStyle: FontStyle.italic),
             )
           ],
         ),
@@ -59,10 +63,10 @@ class HomeScreen extends StatelessWidget {
             mainAxisSpacing: 40.0,
             crossAxisSpacing: 30.0,
             children: [
-              _buildSportCard(context, 'Football', 'assets/images/football.jpeg'),
-              _buildSportCard(context, 'Basketball', 'assets/images/basketball.jpeg'),
-              _buildSportCard(context, 'Cricket', 'assets/images/cricket.jpeg'),
-              _buildSportCard(context, 'Tennis', 'assets/images/tennis.jpeg'),
+              _buildSportCard(context, 'Football', 'assets/images/football.jpg'),
+              _buildSportCard(context, 'Basketball', 'assets/images/basketball.jpg'),
+              _buildSportCard(context, 'Cricket', 'assets/images/cricket.jpg'),
+              _buildSportCard(context, 'Tennis', 'assets/images/tennis.jpg'),
             ],
           ),
         ),
@@ -72,7 +76,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildSportCard(BuildContext context, String sportName, String imagePath) {
     return Card(
-      color: Color.fromARGB(255, 88, 156, 82),
+      color: Color(0xff222421),
       elevation: 4.0,
       margin: EdgeInsets.only(top: 20),
       child: Column(
@@ -94,13 +98,14 @@ class HomeScreen extends StatelessWidget {
               backgroundImage: AssetImage(imagePath),
             ),
           ),
-          SizedBox(height: 10.0),
+          SizedBox(height: 20.0),
           Text(
             sportName,
-            style: TextStyle(
+            style: GoogleFonts.montserrat(  
               color: Colors.white,
-              fontSize: 19.0,
+              fontSize: 20.0,
               fontWeight: FontWeight.bold,
+              fontStyle: FontStyle.normal
             ),
           ),
         ],

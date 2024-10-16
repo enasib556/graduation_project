@@ -21,35 +21,35 @@ class Team {
 }
 
 class Player {
-  int playerKey;
-  String playerImage;
+  int ?playerKey;
+    String ?playerImage;
   String playerName;
 
-  String playerType;
+  String ?playerType;
 
-  String playerAge;
-  String playerYellowCards;
-  String playerRedCards;
-  String playerNumber;
+  String? playerAge;
+  String ?playerYellowCards;
+  String ?playerRedCards;
+  String ?playerNumber;
 
-  String playerGoals;
-  String playerAssists;
+  String ?playerGoals;
+  String ?playerAssists;
   // String playerCountery;
   String ?playerCountry;
 
 
   Player({
-    required this.playerKey,
-    required this.playerImage,
-    required this.playerName,
-    required this.playerType,
-    required this.playerAge,
-    required this.playerAssists,
+     this.playerKey,
+     this.playerImage,
+   required this.playerName,
+    this.playerType,
+     this.playerAge,
+     this.playerAssists,
 
-    required this.playerGoals,
-    required this.playerNumber,
-    required this.playerRedCards,
-    required this.playerYellowCards,
+     this.playerGoals,
+    this.playerNumber,
+    this.playerRedCards,
+    this.playerYellowCards,
     // required this.playerCountery,
      this.playerCountry,
 

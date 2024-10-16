@@ -12,28 +12,29 @@ class ViewPlayer extends StatelessWidget {
 
 
    ViewPlayer({
-     super.key,required this.img,
-    required this.type,
+     super.key,
+    this.img,
+     this.type,
     required this.name,
-    required this.playerAge,
-    required this.playerAssists,
-    required this.playerGoals,
-    required this.playerNumber,
-    required this.playerRedCards,
-    required this.playerYellowCards,
-    required this.playerCountery,
+     this.playerAge,
+     this.playerAssists,
+     this.playerGoals,
+     this.playerNumber,
+     this.playerRedCards,
+     this.playerYellowCards,
+     this.playerCountery,
   });
 
-  final String  img;
-  final String type;
-  final String name;
-   final String playerAge;
-   final  String playerYellowCards;
- final  String playerRedCards;
- final  String playerNumber;
+   String  ?img;
+   String ?type;
+    final String name;
+    String ?playerAge;
+     String ?playerYellowCards;
+   String ?playerRedCards;
+   String ?playerNumber;
     String? playerCountery;
-   final String playerGoals;
-   final String playerAssists;
+    String ?playerGoals;
+    String ?playerAssists;
 
 
   @override
@@ -72,7 +73,7 @@ class ViewPlayer extends StatelessWidget {
                 Row(
                   children: [
                     CachedNetworkImage(
-                      imageUrl: img,
+                      imageUrl:img ??'asset/image/user (1).png',
                       imageBuilder: (context, imageProvider) => Container(
                         width: 120.0,
                         height: 120.0,
@@ -147,7 +148,7 @@ class ViewPlayer extends StatelessWidget {
 
                         Container(
                             margin: EdgeInsets.only(left: 120),
-                            child: Text(type,
+                            child: Text(type!,
                             style: TextStyle(
                               fontSize: 23,
                               color: Colors.white

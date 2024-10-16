@@ -4,16 +4,16 @@ import 'package:share_plus/share_plus.dart';
 import 'image.dart';
 
 void showPlayerDetailsDialogg(BuildContext context,
- String  img,
- String type,
+ String  ?img,
+ String ?type,
  String name,
- String playerAge,
-  String playerYellowCards,
-  String playerRedCards,
-  String playerNumber,
+ String ?playerAge,
+  String ?playerYellowCards,
+  String ?playerRedCards,
+  String ?playerNumber,
 String? playerCountery,
- String playerGoals,
- String playerAssists,
+ String ?playerGoals,
+ String ?playerAssists,
     ) {
   showDialog(
     context: context,
@@ -27,7 +27,7 @@ String? playerCountery,
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          PlayerImage(imageUrl: img),
+          PlayerImage(imageUrl: img??'asset/image/user (1).png'),
           Text('Number: ${playerNumber}', style: const TextStyle(color: Colors.white, fontSize:20,fontStyle: FontStyle.italic)),
           Text('Country: ${playerCountery}', style: const TextStyle(color: Colors.white, fontSize:20, fontStyle: FontStyle.italic)),
           Text('Type: ${type}', style: const TextStyle(color: Colors.white,  fontSize:20,fontStyle: FontStyle.italic)),

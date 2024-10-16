@@ -1,3 +1,16 @@
+buildscript{
+    ext.kotlain_version= '2.0.0'
+    repositories{
+        google()
+        mavenCentral()
+    }
+    dependencies{
+        classpath 'com.android.tools.build:gradle:8.5.1'
+        classpath 'com.google.gms:google-services:4.3.14'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlain_version"
+    }
+}
+
 allprojects {
     repositories {
         google()

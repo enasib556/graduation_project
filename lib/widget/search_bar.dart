@@ -6,9 +6,10 @@ import '../cubit/table_cubit.dart';
 import '../screens/Listed_player_scereen.dart';
 
 class SearcBar extends StatelessWidget {
-   SearcBar({super.key});
-   ListedPlayers listedPlayers=ListedPlayers();
+   SearcBar({super.key,required this.x});
 
+final int x;
+   // ListedPlayers listedPlayers=ListedPlayers(x:x,);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class SearcBar extends StatelessWidget {
 
 
 
-                  onChanged: (value) => _cubit.runFilter(value),
+                  onChanged: (value) => _cubit.runFilter(value,x),
 
                   decoration: InputDecoration(
                     fillColor: Color(0xFF364133),

@@ -14,10 +14,10 @@ class TableCubit extends Cubit<TableState> {
 
 Team ?foundUsers;
 
-  Future<void> runFilter(String enteredKeyword) async {
+  Future<void> runFilter(String enteredKeyword,int x) async {
 
     emit(GetNewsLoading());
-    Team ?response = await GetNewsRepo().getNews(100);
+    Team ?response = await GetNewsRepo().getNews(x);
     if (response == null) {
       emit(GetNewsError());    }
     //
@@ -43,10 +43,10 @@ Team ?foundUsers;
 
 
   }
-  Future<void> getNews() async {
+  Future<void> getNews(int x) async {
     emit(GetNewsLoading());
 
-    Team? response = await GetNewsRepo().getNews(100);
+    Team? response = await GetNewsRepo().getNews(x);
 
     if (response != null) {
       emit(GetNewsSuccess(response));

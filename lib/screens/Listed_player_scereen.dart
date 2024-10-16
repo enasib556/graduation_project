@@ -12,13 +12,13 @@ import '../widget/table_view.dart';
 
 
 class ListedPlayers extends StatelessWidget {
-  ListedPlayers({super.key});
+  ListedPlayers({super.key,required this.x});
   // PlayerModel player;
-
+final int x;
   @override
   Widget build(BuildContext context) {
 
-    context.read<TableCubit>().getNews();
+    context.read<TableCubit>().getNews(x);
     return Scaffold(
       backgroundColor: Color(0xff212320),
 
@@ -49,7 +49,7 @@ class ListedPlayers extends StatelessWidget {
       SingleChildScrollView(
         child: Column(
           children: [
-            SearcBar(),
+            SearcBar(x:x),
             TableView(),
 
           ],
